@@ -41,6 +41,8 @@ table{width:100%;border-collapse:collapse;margin-top:10px}
 th,td{border:1px solid var(--bd);padding:8px;font-size:14px;text-align:left}
 th{background:var(--ac2);color:var(--ac)}
 .del-btn{color:#e11d48;cursor:pointer;border:0;background:none;font-weight:bold}
+ul{padding-left:20px}
+li{margin-bottom:8px}
 </style>
 </head>
 <body>
@@ -80,6 +82,7 @@ th{background:var(--ac2);color:var(--ac)}
         <div class="card" onclick="openTool('clients')"><div class="i">🤝</div><b>Mijozlar bazasi</b><span>Kontragentlar va Excel</span></div>
         <div class="card" onclick="openTool('xarajat')"><div class="i">📒</div><b>Xarajatlar daftari</b><span>Kirim-chiqim va Excel</span></div>
         <div class="card" onclick="openTool('calendar')"><div class="i">📅</div><b>Soliq taqvimi</b><span>Hisobot topshirish muddatlari</span></div>
+        <div class="card" onclick="openTool('notes')"><div class="i">🔔</div><b>Firmalar eslatmalari</b><span>Qaysi firma qachon hisobot beradi</span></div>
       </div>
     </div>
   </div>
@@ -185,10 +188,22 @@ th{background:var(--ac2);color:var(--ac)}
     <button class="back-btn" onclick="goHome()">⬅️ Bosh sahifaga qaytish</button>
     <h3>📅 Soliq taqvimi</h3>
     <ul>
-      <li><b>Har oyning 15-kunigacha:</b> JShDS va ijtimoiy soliq.</li>
+      <li><b>Har oyning 15-kunigacha:</b> JShDS va ijtimoiy soliq hisobotlari.</li>
       <li><b>Har oyning 20-kunigacha:</b> QQS hisoboti va to‘lovi.</li>
       <li><b>Har oyning 25-kunigacha:</b> Foyda solig‘i bo‘nak to‘lovlari.</li>
     </ul>
+  </div>
+
+  <!-- 11. Eslatmalar -->
+  <div id="notes" class="panel">
+    <button class="back-btn" onclick="goHome()">⬅️ Bosh sahifaga qaytish</button>
+    <h3>🔔 Firmalar hisobotlari eslatmasi</h3>
+    <div class="form-group">
+      <label>Muhim eslatmalar va muddatlar:</label>
+      <textarea style="height:120px;" placeholder="Bu yerga o'z eslatmalaringizni yozib qoldirishingiz mumkin...">1. Firma A - Oylik QQS hisoboti 20- sanagacha.
+2. Firma B - Statistika hisoboti har oyning 4-kunigacha.</textarea>
+    </div>
+    <p style="color:var(--mu); font-size:13px;">Bu bo'lim orqali har bir firma bo'yicha qilinishi kerak bo'lgan ishlarni nazoratda tutishingiz mumkin.</p>
   </div>
 
 </div>
@@ -242,7 +257,6 @@ function convertNum() {
   document.getElementById('w-res').innerText = n ? Number(n).toLocaleString() + " so‘m" : 'Natija bu yerda ko‘rinadi...';
 }
 
-/* LocalStorage Data Handling */
 let clients = JSON.parse(localStorage.getItem('zevs_clients') || '[]');
 let expenses = JSON.parse(localStorage.getItem('zevs_expenses') || '[]');
 
@@ -293,7 +307,7 @@ function delExpense(i) {
 function exportExcel(type) {
   let data = type === 'clients' ? clients : expenses;
   if(!data.length) return alert("Yuklab olish uchun ma'lumot yo'q!");
-  let csvContent = "\uFEFF"; // UTF-8 BOM Excel kiritish uchun
+  let csvContent = "\uFEFF";
   if(type === 'clients') {
     csvContent += "Kompaniya Nomi,STIR (INN)\n";
     data.forEach(item => csvContent += `"${item.name}","${item.inn}"\n`);
