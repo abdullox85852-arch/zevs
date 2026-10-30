@@ -229,7 +229,7 @@ const rq=store.get('zv_req',null);if(rq){$('#f_s').value=rq.s;$('#f_si').value=r
 drawItems();invDoc();actDoc();
 let th=store.get('bxh',null);if(th)document.documentElement.dataset.theme=th;
 $('#th').onclick=()=>{const d=document.documentElement.dataset.theme||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'),n=d==='dark'?'light':'dark';document.documentElement.dataset.theme=n;store.set('bxh',n)};
-  addEventListener('keydown',e=>{if(e.key==='Escape'&&location.hash.length>1)location.hash=''});
+addEventListener('keydown',e=>{if(e.key==='Escape'&&location.hash.length>1)location.hash=''});
 route();
 </script>
 </body>
