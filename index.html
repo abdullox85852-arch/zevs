@@ -22,8 +22,8 @@ body{margin:0;background:var(--bg);color:var(--tx);font-family:system-ui,-apple-
 .cat h2{font-size:15px;margin:0 0 4px;display:flex;align-items:center;gap:8px}
 .cat .d{color:var(--mu);font-size:13px;margin:0 0 10px}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px}
-a.t,div.t{display:block;text-decoration:none;color:inherit;background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:14px 15px}
-a.t:hover{border-color:var(--ac)}
+a.t,div.t{display:block;text-decoration:none;color:inherit;background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:14px 15px;transition:all 0.2s ease}
+a.t:hover{border-color:var(--ac);transform:translateY(-2px)}
 .t .i{font-size:24px}.t b{display:block;margin-top:4px}.t span{color:var(--mu);font-size:13px}
 .t .tag{display:inline-block;margin-top:8px;font-size:11px;background:var(--ac2);color:var(--ac);padding:2px 9px;border-radius:10px}
 div.t{opacity:.55;border-style:dashed}
@@ -35,31 +35,35 @@ div.t{opacity:.55;border-style:dashed}
 <div class="w">
 <input id="q" placeholder="🔍 Asbob qidirish: QQS, faktura, ish haqi…">
 
-<div class="cat"><h2>🧮 Hisob-kitoblar</h2><p class="d">Tez va aniq hisoblash kalkulyatorlari</p>
+<!-- 1. Soliq va Hisob-kitoblar -->
+<div class="cat"><h2>🧮 1. Soliq va Hisob-kitoblar</h2><p class="d">Tez va aniq hisoblash kalkulyatorlari</p>
 <div class="grid">
-<a class="t" href="https://claude.ai/artifact/W6nMCgcEuTDiCg94Xdkr1E" target="_blank" rel="noopener" data-k="qqs soliq qo‘shilgan qiymat"><div class="i">💰</div><b>QQS kalkulyatori</b><span>QQS qo‘shish va ajratish, stavka tugmalari</span><span class="tag">Kalkulyatorlar to‘plami</span></a>
-<a class="t" href="https://claude.ai/artifact/W6nMCgcEuTDiCg94Xdkr1E" target="_blank" rel="noopener" data-k="ish haqi maosh brutto netto jshds inps ijtimoiy"><div class="i">👥</div><b>Ish haqi</b><span>Brutto va netto, JShDS, INPS, ijtimoiy soliq</span><span class="tag">Kalkulyatorlar to‘plami</span></a>
-<a class="t" href="https://claude.ai/artifact/W6nMCgcEuTDiCg94Xdkr1E" target="_blank" rel="noopener" data-k="amortizatsiya asosiy vositalar eskirish"><div class="i">🏭</div><b>Amortizatsiya</b><span>Yillik va oylik hisob, yillar jadvali</span><span class="tag">Kalkulyatorlar to‘plami</span></a>
-<a class="t" href="https://claude.ai/artifact/W6nMCgcEuTDiCg94Xdkr1E" target="_blank" rel="noopener" data-k="foiz ustama chegirma"><div class="i">％</div><b>Foiz kalkulyatori</b><span>Ustama, chegirma, o‘zgarish foizi</span><span class="tag">Kalkulyatorlar to‘plami</span></a>
+<a class="t" href="https://claude.ai/artifact/W6nMCgcEuTDiCg94Xdkr1E" data-k="qqs soliq qo‘shilgan qiymat"><div class="i">💰</div><b>QQS kalkulyatori</b><span>QQS qo‘shish va ajratish, stavka tugmalari</span><span class="tag">Kalkulyatorlar</span></a>
+<a class="t" href="https://claude.ai/artifact/W6nMCgcEuTDiCg94Xdkr1E" data-k="ish haqi maosh brutto netto jshds inps ijtimoiy"><div class="i">👥</div><b>Ish haqi kalkulyatori</b><span>Brutto va netto, JShDS, INPS, ijtimoiy soliq</span><span class="tag">Kalkulyatorlar</span></a>
+<a class="t" href="https://claude.ai/artifact/W6nMCgcEuTDiCg94Xdkr1E" data-k="amortizatsiya asosiy vositalar eskirish"><div class="i">🏭</div><b>Amortizatsiya</b><span>Yillik va oylik hisob, yillar jadvali</span><span class="tag">Kalkulyatorlar</span></a>
+<a class="t" href="https://claude.ai/artifact/W6nMCgcEuTDiCg94Xdkr1E" data-k="foiz ustama chegirma"><div class="i">％</div><b>Foiz kalkulyatori</b><span>Ustama, chegirma, o‘zgarish foizi</span><span class="tag">Kalkulyatorlar</span></a>
 </div></div>
 
-<div class="cat"><h2>📄 Hujjatlar</h2><p class="d">Tayyor hujjatlarni tez yaratish</p>
+<!-- 2. Hujjatlar -->
+<div class="cat"><h2>📄 2. Hujjatlar va Shablonlar</h2><p class="d">Tayyor hujjatlarni tez rasmiylashtirish</p>
 <div class="grid">
-<a class="t" href="https://claude.ai/artifact/BRHhDn2h3WWTiGWBnTAchy" target="_blank" rel="noopener" data-k="hisob faktura invoice chop pdf rekvizit"><div class="i">🧾</div><b>Hisob-faktura</b><span>Rekvizitlar saqlanadi, chop etish va PDF</span><span class="tag">Faktura yaratuvchi</span></a>
-<a class="t" href="https://claude.ai/artifact/W6nMCgcEuTDiCg94Xdkr1E" target="_blank" rel="noopener" data-k="summa so‘zda yozish propis shartnoma"><div class="i">✍️</div><b>Summa so‘z bilan</b><span>Raqamni so‘zga aylantirish, tiyin bilan</span><span class="tag">Kalkulyatorlar to‘plami</span></a>
+<a class="t" href="https://claude.ai/artifact/BRHhDn2h3WWTiGWBnTAchy" data-k="hisob faktura invoice chop pdf rekvizit"><div class="i">🧾</div><b>Hisob-faktura</b><span>Rekvizitlar saqlanadi, chop etish va PDF</span><span class="tag">Faktura yaratuvchi</span></a>
+<a class="t" href="https://claude.ai/artifact/W6nMCgcEuTDiCg94Xdkr1E" data-k="summa so‘zda yozish propis shartnoma"><div class="i">✍️</div><b>Summa so‘z bilan</b><span>Raqamni so‘zga aylantirish, tiyin bilan</span><span class="tag">Matn aylantirgich</span></a>
 </div></div>
 
-<div class="cat"><h2>🗂 Ish daftari</h2><p class="d">Kundalik ish uchun kalendar, akt, baza va daftar</p>
+<!-- 3. Ish daftari -->
+<div class="cat"><h2>🗂 3. Kundalik Ish daftari</h2><p class="d">Har kundagi amaliyotlar, kalendar va bazalar</p>
 <div class="grid">
-<a class="t" href="https://claude.ai/artifact/YFWmmTzDShtm1ZTvQWBeYf#kalendar" target="_blank" rel="noopener" data-k="kalendar muddat hisobot soliq"><div class="i">📅</div><b>Muddatlar kalendari</b><span>Hisobot muddatlari, necha kun qolgani</span><span class="tag">Ish daftari</span></a>
-<a class="t" href="https://claude.ai/artifact/YFWmmTzDShtm1ZTvQWBeYf#akt" target="_blank" rel="noopener" data-k="akt dalolatnoma bajarilgan ishlar"><div class="i">📝</div><b>Dalolatnoma (akt)</b><span>Bajarilgan ishlar, chop etish va PDF</span><span class="tag">Ish daftari</span></a>
-<a class="t" href="https://claude.ai/artifact/YFWmmTzDShtm1ZTvQWBeYf#mijozlar" target="_blank" rel="noopener" data-k="mijoz kontragent baza"><div class="i">🤝</div><b>Mijozlar bazasi</b><span>Kontragentlar rekvizitlari, qidiruv</span><span class="tag">Ish daftari</span></a>
-<a class="t" href="https://claude.ai/artifact/YFWmmTzDShtm1ZTvQWBeYf#xarajat" target="_blank" rel="noopener" data-k="xarajat daftar kirim chiqim"><div class="i">📒</div><b>Xarajatlar daftari</b><span>Oylik kirim-chiqim va qoldiq</span><span class="tag">Ish daftari</span></a>
+<a class="t" href="https://claude.ai/artifact/YFWmmTzDShtm1ZTvQWBeYf#kalendar" data-k="kalendar muddat hisobot soliq"><div class="i">📅</div><b>Muddatlar kalendari</b><span>Hisobot muddatlari, necha kun qolgani</span><span class="tag">Ish daftari</span></a>
+<a class="t" href="https://claude.ai/artifact/YFWmmTzDShtm1ZTvQWBeYf#akt" data-k="akt dalolatnoma bajarilgan ishlar"><div class="i">📝</div><b>Dalolatnoma (akt)</b><span>Bajarilgan ishlar, chop etish va PDF</span><span class="tag">Ish daftari</span></a>
+<a class="t" href="https://claude.ai/artifact/YFWmmTzDShtm1ZTvQWBeYf#mijozlar" data-k="mijoz kontragent baza"><div class="i">🤝</div><b>Mijozlar bazasi</b><span>Kontragentlar rekvizitlari, qidiruv</span><span class="tag">Ish daftari</span></a>
+<a class="t" href="https://claude.ai/artifact/YFWmmTzDShtm1ZTvQWBeYf#xarajat" data-k="xarajat daftar kirim chiqim"><div class="i">📒</div><b>Xarajatlar daftari</b><span>Oylik kirim-chiqim va qoldiq</span><span class="tag">Ish daftari</span></a>
 </div></div>
 
-<div class="cat"><h2>🔔 Eslatmalar</h2><p class="d">Muddatlarni o‘tkazib yubormaslik uchun</p>
+<!-- 4. Eslatmalar -->
+<div class="cat"><h2>🔔 4. Eslatmalar va Soliq taqvimi</h2><p class="d">Muddatlarni o‘tkazib yubormaslik uchun</p>
 <div class="grid">
-<a class="t" href="https://claude.ai/artifact/AwGDj3fqndxAP4DdN64cfU" target="_blank" rel="noopener" data-k="soliq eslatma firma excel muddat topshirish hisobot statistika mehnat"><div class="i">🔔</div><b>Firmalar hisobotlari</b><span>Qaysi firma qaysi hisobotni qachon topshiradi, har oy va har chorak</span><span class="tag">Soliq eslatmalari</span></a>
+<a class="t" href="https://claude.ai/artifact/AwGDj3fqndxAP4DdN64cfU" data-k="soliq eslatma firma excel muddat topshirish hisobot statistika mehnat"><div class="i">🔔</div><b>Firmalar hisobotlari</b><span>Qaysi firma qaysi hisobotni qachon topshiradi (har oy va chorak)</span><span class="tag">Soliq eslatmalari</span></a>
 </div></div>
 
 <p class="none" id="no">Hech narsa topilmadi.</p>
