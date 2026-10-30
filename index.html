@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Zevs · Buxgalter markazi</title>
+<meta name="theme-color" content="#0f766e">
 <style>
 :root{--bg:#f2f5f7;--card:#fff;--tx:#17212b;--mu:#667085;--ac:#0f766e;--ac2:#e3f3f0;--bd:#e1e6eb;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1318;--card:#19202a;--tx:#e8ecf1;--mu:#97a2b3;--ac:#2dd4bf;--ac2:#14302d;--bd:#28313d}}
@@ -16,461 +17,219 @@ body{margin:0;background:var(--bg);color:var(--tx);font-family:system-ui,-apple-
 .hd h1{font-size:25px;margin:0}.hd p{margin:4px 0 0;font-size:14px;opacity:.88}
 #th{border:0;background:rgba(255,255,255,.18);color:#fff;border-radius:50%;width:40px;height:40px;font-size:18px;cursor:pointer;flex:0 0 auto}
 .w{max-width:820px;margin:-36px auto 0;padding:0 14px 40px}
+.view{display:none}.view.on{display:block}
 #q{width:100%;padding:13px 16px;border:1px solid var(--bd);border-radius:14px;font-size:16px;background:var(--card);color:var(--tx);outline:0;box-shadow:0 2px 10px rgba(16,24,40,.08)}
-#q:focus{border-color:var(--ac)}
-.cat{margin-top:24px}
-.cat h2{font-size:15px;margin:0 0 4px;display:flex;align-items:center;gap:8px}
-.cat .d{color:var(--mu);font-size:13px;margin:0 0 10px}
+.cat{margin-top:24px}.cat h2{font-size:15px;margin:0 0 4px}.cat .d{color:var(--mu);font-size:13px;margin:0 0 10px}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px}
-.card{display:block;text-decoration:none;color:inherit;background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:14px 15px;cursor:pointer;transition:all 0.2s ease}
-.card:hover{border-color:var(--ac);transform:translateY(-2px)}
-.card .i{font-size:24px}.card b{display:block;margin-top:4px}.card span{color:var(--mu);font-size:13px}
-.card .tag{display:inline-block;margin-top:8px;font-size:11px;background:var(--ac2);color:var(--ac);padding:2px 9px;border-radius:10px}
+a.t{display:block;text-decoration:none;color:inherit;background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:14px 15px}
+a.t:hover{border-color:var(--ac)}
+.t .i{font-size:24px}.t b{display:block;margin-top:4px}.t span{color:var(--mu);font-size:13px}
 .none{display:none;text-align:center;color:var(--mu);margin-top:30px}
-
-/* Tool Panels & Header with Right Back Button */
-.panel{display:none;background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:22px;box-shadow:0 4px 15px rgba(16,24,40,.05);margin-top:20px}
-.panel-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;border-bottom:1px solid var(--bd);padding-bottom:12px}
-.panel-top h3{margin:0;font-size:18px;color:var(--ac)}
-.back-btn{background:var(--ac2);color:var(--ac);border:0;padding:8px 14px;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
-.back-btn:hover{opacity:.85}
-
-.form-group{margin-bottom:14px}
-label{display:block;font-size:13px;color:var(--mu);margin-bottom:5px}
-input,select,textarea{width:100%;padding:10px 12px;border:1px solid var(--bd);border-radius:10px;background:var(--bg);color:var(--tx);font-size:15px;outline:none}
-input:focus,select:focus{border-color:var(--ac)}
-.res-box{background:var(--ac2);color:var(--ac);padding:14px;border-radius:10px;font-weight:600;margin-top:14px}
-button.action-btn{background:var(--ac);color:#fff;border:0;padding:12px 20px;border-radius:10px;font-size:15px;cursor:pointer;font-weight:500;width:100%;margin-top:10px}
-button.excel-btn{background:#107c41;color:#fff;border:0;padding:10px 16px;border-radius:10px;font-size:14px;cursor:pointer;font-weight:500;margin-top:12px;display:inline-flex;align-items:center;gap:6px}
-button.excel-btn:hover{opacity:.9}
-table{width:100%;border-collapse:collapse;margin-top:10px}
-th,td{border:1px solid var(--bd);padding:8px;font-size:14px;text-align:left}
-th{background:var(--ac2);color:var(--ac)}
-.del-btn{color:#e11d48;cursor:pointer;border:0;background:none;font-weight:bold}
-ul{padding-left:20px}
-li{margin-bottom:8px}
+.back{display:inline-block;background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:8px 14px;text-decoration:none;color:var(--tx);font-size:14px;box-shadow:0 2px 10px rgba(16,24,40,.08)}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:16px;margin-top:14px}
+.card h2{margin:0 0 6px;font-size:19px}
+label{display:block;font-size:13px;color:var(--mu);margin:10px 0 4px}
+input,select,textarea{width:100%;padding:10px 12px;border:1px solid var(--bd);border-radius:10px;font:inherit;font-size:16px;background:var(--bg);color:var(--tx)}
+input:focus,select:focus,textarea:focus{outline:0;border-color:var(--ac)}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.btn{background:var(--ac);color:#fff;border:0;border-radius:10px;padding:10px 16px;font:inherit;font-size:15px;cursor:pointer;margin-top:12px;margin-right:6px}
+.btn.s{background:var(--ac2);color:var(--ac)}
+.r{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid var(--bd)}
+.res{margin-top:12px;background:var(--ac2);border-radius:10px;padding:4px 12px}
+table{width:100%;border-collapse:collapse;font-size:14px}
+td,th{padding:7px 6px;border-bottom:1px solid var(--bd);text-align:left}
+.sc{overflow-x:auto}
+.bdg{display:inline-block;border-radius:10px;padding:1px 9px;font-size:12px;background:var(--ac2);color:var(--ac);white-space:nowrap}
+.bdg.w1{background:#fde8c8;color:#92400e}.bdg.w2{background:#fde0e0;color:#b42318}
+.x{background:0;border:0;cursor:pointer;font-size:16px}
+.note{color:var(--mu);font-size:12px;margin-top:8px}
+.doc{background:#fff;color:#000;padding:20px;border-radius:8px;margin-top:14px;font-size:14px}
+.doc table td,.doc table th{border:1px solid #888}
+.doc h3{text-align:center;margin:0 0 10px}
+@media print{body *{visibility:hidden}.view.on .doc,.view.on .doc *{visibility:visible}.view.on .doc{position:absolute;left:0;top:0;width:100%;margin:0}}
 </style>
 </head>
 <body>
 <div class="hd"><div><div><h1>⚡ Zevs</h1><p>Buxgalter markazi · barcha ish asboblaringiz bir joyda, bo‘limlarga ajratilgan.</p></div><button id="th" title="Mavzu">🌓</button></div></div>
 <div class="w">
 
-<div id="home-content">
-  <input id="q" placeholder="🔍 Asbob qidirish: QQS, faktura, ish haqi, eslatmalar…">
-
-  <div class="cat"><h2>🧮 Hisob-kitoblar</h2><p class="d">Tez va aniq hisoblash kalkulyatorlari</p>
-  <div class="grid">
-    <div class="card" onclick="openTool('qqs')" data-k="qqs soliq qo‘shilgan qiymat"><div class="i">💰</div><b>QQS kalkulyatori</b><span>QQS qo‘shish va ajratish, stavka tugmalari</span><span class="tag">Kalkulyatorlar to‘plami</span></div>
-    <div class="card" onclick="openTool('salary')" data-k="ish haqi maosh brutto netto jshds inps ijtimoiy"><div class="i">👥</div><b>Ish haqi</b><span>Brutto va netto, JShDS, INPS, ijtimoiy soliq</span><span class="tag">Kalkulyatorlar to‘plami</span></div>
-    <div class="card" onclick="openTool('amort')" data-k="amortizatsiya asosiy vositalar eskirish"><div class="i">🏭</div><b>Amortizatsiya</b><span>Yillik va oylik hisob, yillar jadvali</span><span class="tag">Kalkulyatorlar to‘plami</span></div>
-    <div class="card" onclick="openTool('percent')" data-k="foiz ustama chegirma"><div class="i">％</div><b>Foiz kalkulyatori</b><span>Ustama, chegirma, o‘zgarish foizi</span><span class="tag">Kalkulyatorlar to‘plami</span></div>
-  </div></div>
-
-  <div class="cat"><h2>📄 Hujjatlar</h2><p class="d">Tayyor hujjatlarni tez yaratish</p>
-  <div class="grid">
-    <div class="card" onclick="openTool('invoice')" data-k="hisob faktura invoice chop pdf rekvizit"><div class="i">🧾</div><b>Hisob-faktura</b><span>Rekvizitlar saqlanadi, chop etish va PDF</span><span class="tag">Faktura yaratuvchi</span></div>
-    <div class="card" onclick="openTool('words')" data-k="summa so‘zda yozish propis shartnoma"><div class="i">✍️</div><b>Summa so‘z bilan</b><span>Raqamni so‘zga aylantirish, tiyin bilan</span><span class="tag">Matn aylantirgich</span></div>
-    <div class="card" onclick="openTool('akt')" data-k="akt dalolatnoma bajarilgan ishlar"><div class="i">📝</div><b>Dalolatnoma (akt)</b><span>Bajarilgan ishlar, chop etish va PDF</span><span class="tag">Ish daftari</span></div>
-  </div></div>
-
-  <div class="cat"><h2>🗂 Ish daftari</h2><p class="d">Kundalik ish uchun kalendar, akt, baza va daftar</p>
-  <div class="grid">
-    <div class="card" onclick="openTool('calendar')" data-k="kalendar muddat hisobot soliq"><div class="i">📅</div><b>Muddatlar kalendari</b><span>Hisobot muddatlari, necha kun qolgani</span><span class="tag">Ish daftari</span></div>
-    <div class="card" onclick="openTool('clients')" data-k="mijoz kontragent baza excel"><div class="i">🤝</div><b>Mijozlar bazasi</b><span>Kontragentlar rekvizitlari, qidiruv va Excel</span><span class="tag">Ish daftari</span></div>
-    <div class="card" onclick="openTool('xarajat')" data-k="xarajat daftar kirim chiqim excel"><div class="i">📒</div><b>Xarajatlar daftari</b><span>Oylik kirim-chiqim va Excel</span><span class="tag">Ish daftari</span></div>
-  </div></div>
-
-  <div class="cat"><h2>🔔 Eslatmalar</h2><p class="d">Muddatlarni o‘tkazib yubormaslik uchun</p>
-  <div class="grid">
-    <div class="card" onclick="openTool('notes')" data-k="soliq eslatma firma excel muddat topshirish hisobot statistika mehnat 70 ta firma"><div class="i">🔔</div><b>Firmalar hisobotlari (70 ta firma)</b><span>Barcha 70 ta firma va 145 ta soliq muddatlari</span><span class="tag">Soliq eslatmalari</span></div>
-  </div></div>
-
-  <p class="none" id="no">Hech narsa topilmadi.</p>
+<div class="view" id="v-home">
+<input id="q" placeholder="🔍 Asbob qidirish: QQS, faktura, ish haqi…">
+<div id="cats"></div>
+<p class="none" id="no">Hech narsa topilmadi.</p>
 </div>
 
-<!-- ASBOBLAR PANELI -->
+<div class="view" data-c="qqs" id="v-qqs"><a class="back" href="#">← Bosh sahifa</a><div class="card"><h2>💰 QQS kalkulyatori</h2>
+<label>Summa (so‘m)</label><input id="q_s" inputmode="decimal">
+<div class="g2"><div><label>QQS stavkasi</label><select id="q_r"><option value="12">12%</option><option value="0">0%</option></select></div>
+<div><label>Amal</label><select id="q_m"><option value="add">QQS qo‘shish</option><option value="cut">QQS ajratish</option></select></div></div>
+<div class="res" id="q_o"></div></div></div>
 
-<!-- 1. QQS -->
-<div id="qqs" class="panel">
-  <div class="panel-top">
-    <h3>💰 QQS kalkulyatori</h3>
-    <button class="back-btn" onclick="goHome()">Bosh sahifaga qaytish ➡️</button>
-  </div>
-  <div class="form-group"><label>Summa (so‘m):</label><input type="number" id="qqs-sum" placeholder="Summa..." oninput="calcQQS()"></div>
-  <div class="form-group"><label>QQS stavkasi (%):</label>
-    <select id="qqs-rate" onchange="calcQQS()"><option value="12">12% (Standard)</option><option value="15">15%</option><option value="0">0%</option></select>
-  </div>
-  <div class="res-box" id="qqs-res">QQS summasi: 0 so‘m<br>QQS bilan umumiy: 0 so‘m</div>
-</div>
+<div class="view" data-c="pay" id="v-pay"><a class="back" href="#">← Bosh sahifa</a><div class="card"><h2>👥 Ish haqi</h2>
+<div class="g2"><div><label>Summa (so‘m)</label><input id="i_b" inputmode="decimal"></div>
+<div><label>Summa turi</label><select id="i_m"><option value="b">Brutto (hisoblangan)</option><option value="n">Netto (qo‘lga tegadigan)</option></select></div></div>
+<div class="g2"><div><label>JShDS (%)</label><input id="i_j" value="12"></div><div><label>INPS (%)</label><input id="i_n" value="0.1"></div></div>
+<label>Ijtimoiy soliq, ish beruvchi (%)</label><input id="i_s" value="12">
+<div class="res" id="i_o"></div><p class="note">Stavkalar o‘zgarsa, shu maydonlarda tuzating.</p></div></div>
 
-<!-- 2. Ish haqi -->
-<div id="salary" class="panel">
-  <div class="panel-top">
-    <h3>👥 Ish haqi hisoblagichi</h3>
-    <button class="back-btn" onclick="goHome()">Bosh sahifaga qaytish ➡️</button>
-  </div>
-  <div class="form-group"><label>Hisoblangan ish haqi (Brutto so‘m):</label><input type="number" id="sal-sum" placeholder="Summa..." oninput="calcSalary()"></div>
-  <div class="res-box" id="sal-res">JShDS (12%): 0 so‘m<br>INPS (0.1%): 0 so‘m<br>Qo‘lga tegadigan (Netto): 0 so‘m</div>
-</div>
+<div class="view" data-c="amo" id="v-amo"><a class="back" href="#">← Bosh sahifa</a><div class="card"><h2>🏭 Amortizatsiya</h2>
+<div class="g2"><div><label>Boshlang‘ich qiymat</label><input id="a_c" inputmode="decimal"></div><div><label>Yillik norma (%)</label><input id="a_r" inputmode="decimal"></div></div>
+<div class="res" id="a_o"></div><div class="sc" id="a_t"></div></div></div>
 
-<!-- 3. Amortizatsiya -->
-<div id="amort" class="panel">
-  <div class="panel-top">
-    <h3>🏭 Amortizatsiya kalkulyatori</h3>
-    <button class="back-btn" onclick="goHome()">Bosh sahifaga qaytish ➡️</button>
-  </div>
-  <div class="form-group"><label>Boshlang‘ich qiymat:</label><input type="number" id="am-val" placeholder="Qiymat..." oninput="calcAmort()"></div>
-  <div class="form-group"><label>Yillik norma (%):</label><input type="number" id="am-rate" value="20" oninput="calcAmort()"></div>
-  <div class="res-box" id="am-res">Yillik: 0 so‘m<br>Oylik: 0 so‘m</div>
-</div>
+<div class="view" data-c="pct" id="v-pct"><a class="back" href="#">← Bosh sahifa</a><div class="card"><h2>％ Foiz kalkulyatori</h2>
+<div class="g2"><div><label>Summa</label><input id="p_s" inputmode="decimal"></div><div><label>Foiz (%)</label><input id="p_p" inputmode="decimal"></div></div>
+<div class="res" id="p_o"></div>
+<div class="g2"><div><label>Eski qiymat</label><input id="p_a" inputmode="decimal"></div><div><label>Yangi qiymat</label><input id="p_b" inputmode="decimal"></div></div>
+<div class="res" id="p_o2"></div></div></div>
 
-<!-- 4. Foiz -->
-<div id="percent" class="panel">
-  <div class="panel-top">
-    <h3>％ Foiz kalkulyatori</h3>
-    <button class="back-btn" onclick="goHome()">Bosh sahifaga qaytish ➡️</button>
-  </div>
-  <div class="form-group"><label>Summa:</label><input type="number" id="p-val" oninput="calcPercent()"></div>
-  <div class="form-group"><label>Foiz (%):</label><input type="number" id="p-rate" oninput="calcPercent()"></div>
-  <div class="res-box" id="p-res">Foiz miqdori: 0 so‘m<br>Qo‘shilganda: 0 so‘m<br>Chegirma bilan: 0 so‘m</div>
-</div>
+<div class="view" data-c="inv" id="v-inv"><a class="back" href="#">← Bosh sahifa</a><div class="card"><h2>🧾 Hisob-faktura</h2>
+<div class="g2"><div><label>Raqam</label><input id="f_no" value="1"></div><div><label>Sana</label><input id="f_d" type="date"></div></div>
+<div class="g2"><div><label>Sotuvchi</label><input id="f_s"></div><div><label>Sotuvchi STIR</label><input id="f_si"></div></div>
+<label>Sotuvchi hisob raqami va bank</label><input id="f_sb">
+<div class="g2"><div><label>Xaridor</label><input id="f_b"></div><div><label>Xaridor STIR</label><input id="f_bi"></div></div>
+<label>QQS</label><select id="f_v"><option value="add">12% ustiga qo‘shiladi</option><option value="inc">12% narxga kiritilgan</option><option value="none">QQSsiz</option></select>
+<label>Mahsulot / xizmatlar</label><div id="f_items"></div>
+<button class="btn s" id="f_add">+ Qator</button><button class="btn" onclick="print()">🖨 Chop etish / PDF</button>
+<p class="note">Sotuvchi rekvizitlari brauzerda saqlanadi.</p></div><div class="doc" id="f_doc"></div></div>
 
-<!-- 5. Faktura -->
-<div id="invoice" class="panel">
-  <div class="panel-top">
-    <h3>🧾 Hisob-faktura generatori</h3>
-    <button class="back-btn" onclick="goHome()">Bosh sahifaga qaytish ➡️</button>
-  </div>
-  <div class="form-group"><label>Sotuvchi korxona:</label><input type="text" id="inv-seller" placeholder="MchJ..."></div>
-  <div class="form-group"><label>Xaridor korxona:</label><input type="text" id="inv-buyer" placeholder="MchJ..."></div>
-  <div class="form-group"><label>Mahsulot / Xizmat:</label><input type="text" id="inv-item" placeholder="Buxgalteriya xizmati"></div>
-  <div class="form-group"><label>Summa (so‘m):</label><input type="number" id="inv-price" placeholder="1000000"></div>
-  <button class="action-btn" onclick="window.print()">Chop etish / PDF</button>
-</div>
+<div class="view" data-c="words" id="v-words"><a class="back" href="#">← Bosh sahifa</a><div class="card"><h2>✍️ Summa so‘z bilan</h2>
+<label>Raqamli summa (tiyin bilan: 1250000.50)</label><input id="s_n" inputmode="decimal">
+<div class="res" id="s_o" style="padding:12px">Natija shu yerda ko‘rinadi…</div>
+<button class="btn" id="s_c">Nusxalash</button></div></div>
 
-<!-- 6. So'zda -->
-<div id="words" class="panel">
-  <div class="panel-top">
-    <h3>✍️ Summani so‘z bilan yozish</h3>
-    <button class="back-btn" onclick="goHome()">Bosh sahifaga qaytish ➡️</button>
-  </div>
-  <div class="form-group"><label>Raqamli summa:</label><input type="number" id="w-num" placeholder="1525000" oninput="convertNum()"></div>
-  <div class="res-box" id="w-res">Natija bu yerda ko‘rinadi...</div>
-</div>
+<div class="view" data-c="act" id="v-act"><a class="back" href="#">← Bosh sahifa</a><div class="card"><h2>📝 Dalolatnoma (akt)</h2>
+<div class="g2"><div><label>Raqam</label><input id="t_no" value="1"></div><div><label>Sana</label><input id="t_d" type="date"></div></div>
+<div class="g2"><div><label>Ijrochi</label><input id="t_s"></div><div><label>Buyurtmachi</label><input id="t_b"></div></div>
+<label>Shartnoma (ixtiyoriy)</label><input id="t_k" placeholder="№ 12 dan 01.10.2026">
+<label>Bajarilgan ishlar</label><textarea id="t_x" rows="3"></textarea>
+<div class="g2"><div><label>Summa (so‘m)</label><input id="t_m" inputmode="decimal"></div><div><label>QQS</label><select id="t_v"><option value="0">QQSsiz</option><option value="12">Shu jumladan 12%</option></select></div></div>
+<button class="btn" onclick="print()">🖨 Chop etish / PDF</button></div><div class="doc" id="t_doc"></div></div>
 
-<!-- 7. Akt -->
-<div id="akt" class="panel">
-  <div class="panel-top">
-    <h3>📝 Bajarilgan ishlar dalolatnomasi</h3>
-    <button class="back-btn" onclick="goHome()">Bosh sahifaga qaytish ➡️</button>
-  </div>
-  <div class="form-group"><label>Buyurtmachi:</label><input type="text" id="akt-client"></div>
-  <div class="form-group"><label>Xizmatlar tavsifi:</label><textarea id="akt-desc"></textarea></div>
-  <div class="form-group"><label>Summa:</label><input type="number" id="akt-sum"></div>
-  <button class="action-btn" onclick="window.print()">Chop etish</button>
-</div>
+<div class="view" id="v-cal"><a class="back" href="#">← Bosh sahifa</a><div class="card"><h2>📅 Muddatlar kalendari</h2><div class="sc" id="k_l"></div>
+<p class="note">Muddatlar umumiy qoida bo‘yicha. Dam olish kuniga to‘g‘ri kelsa va qonun o‘zgarsa, soliq.uz dan tekshiring.</p></div></div>
 
-<!-- 8. Kalendar -->
-<div id="calendar" class="panel">
-  <div class="panel-top">
-    <h3>📅 Muddatlar va soliq taqvimi</h3>
-    <button class="back-btn" onclick="goHome()">Bosh sahifaga qaytish ➡️</button>
-  </div>
-  <ul>
-    <li><b>Har oyning 15-kunigacha:</b> JShDS va ijtimoiy soliq hisobotlari.</li>
-    <li><b>Har oyning 20-kunigacha:</b> QQS hisobotini topshirish va to‘lash.</li>
-    <li><b>Har oyning 25-kunigacha:</b> Foyda solig‘i bo‘yicha oylik bo‘nak to‘lovlari.</li>
-    <li><b>Har chorakdan keyingi oyning 15-kunigacha:</b> Mol-mulk va yer soliqlari hisobotlari.</li>
-  </ul>
-</div>
+<div class="view" id="v-cli"><a class="back" href="#">← Bosh sahifa</a><div class="card"><h2>🤝 Mijozlar bazasi</h2>
+<div class="g2"><div><label>Kompaniya</label><input id="c_n"></div><div><label>STIR</label><input id="c_i" inputmode="numeric"></div></div>
+<label>Telefon</label><input id="c_p"><button class="btn" id="c_a">Qo‘shish</button><button class="btn s" id="c_x">📊 Excel (.csv)</button>
+<label>Qidiruv</label><input id="c_q"><div class="sc" id="c_l"></div></div></div>
 
-<!-- 9. Mijozlar -->
-<div id="clients" class="panel">
-  <div class="panel-top">
-    <h3>🤝 Mijozlar bazasi</h3>
-    <button class="back-btn" onclick="goHome()">Bosh sahifaga qaytish ➡️</button>
-  </div>
-  <div class="form-group"><label>Kompaniya nomi:</label><input type="text" id="cl-name"></div>
-  <div class="form-group"><label>STIR (INN):</label><input type="number" id="cl-inn"></div>
-  <button class="action-btn" onclick="addClient()">Mijozni qo‘shish</button>
-  <table>
-    <thead><tr><th>Kompaniya</th><th>STIR</th><th>O‘chirish</th></tr></thead>
-    <tbody id="cl-list"></tbody>
-  </table>
-  <button class="excel-btn" onclick="exportExcel('clients')">📊 Excelga yuklab olish (.csv)</button>
-</div>
+<div class="view" id="v-exp"><a class="back" href="#">← Bosh sahifa</a><div class="card"><h2>📒 Xarajatlar daftari</h2>
+<div class="g2"><div><label>Turi</label><select id="e_t"><option value="out">Chiqim</option><option value="in">Kirim</option></select></div><div><label>Sana</label><input id="e_d" type="date"></div></div>
+<div class="g2"><div><label>Nomi</label><input id="e_n"></div><div><label>Summa</label><input id="e_s" inputmode="decimal"></div></div>
+<button class="btn" id="e_a">Qo‘shish</button><button class="btn s" id="e_x">📊 Excel (.csv)</button>
+<label>Oy</label><input id="e_m" type="month"><div class="res" id="e_o"></div><div class="sc" id="e_l"></div></div></div>
 
-<!-- 10. Xarajat -->
-<div id="xarajat" class="panel">
-  <div class="panel-top">
-    <h3>📒 Xarajatlar daftari</h3>
-    <button class="back-btn" onclick="goHome()">Bosh sahifaga qaytish ➡️</button>
-  </div>
-  <div class="form-group"><label>Xarajat nomi:</label><input type="text" id="ex-name"></div>
-  <div class="form-group"><label>Summa:</label><input type="number" id="ex-sum"></div>
-  <button class="action-btn" onclick="addExpense()">Qo‘shish</button>
-  <table>
-    <thead><tr><th>Nomi</th><th>Summa</th><th>O‘chirish</th></tr></thead>
-    <tbody id="ex-list"></tbody>
-  </table>
-  <button class="excel-btn" onclick="exportExcel('expenses')">📊 Excelga yuklab olish (.csv)</button>
-</div>
-
-<!-- 11. Eslatmalar (Barcha 70 ta firma va 145 ta ma'lumot) -->
-<div id="notes" class="panel">
-  <div class="panel-top">
-    <h3>🔔 Firmalar hisobotlari va soliq turlari (70 ta firma)</h3>
-    <button class="back-btn" onclick="goHome()">Bosh sahifaga qaytish ➡️</button>
-  </div>
-  <div class="form-group">
-    <label>Barcha firmalarning soliq va hisobot muddatlari jadvali (145 ta eslatma):</label>
-    <div style="max-height: 480px; overflow-y: auto; border: 1px solid var(--bd); border-radius: 10px; padding: 10px; background: var(--bg);">
-      <table style="width:100%; border-collapse: collapse;">
-        <thead>
-          <tr>
-            <th>Firma nomi</th>
-            <th>Hisobot / Soliq turi</th>
-            <th>Muddat / Sana</th>
-          </tr>
-        </thead>
-        <tbody id="firms-table-body">
-          <!-- Exceldagi barcha 145 ta qator avtomatik yuklanadi -->
-        </tbody>
-      </table>
-    </div>
-  </div>
-  <p style="color:var(--mu); font-size:13px; margin-top:10px;">Jami 70 ta kompaniyaning oylik va choraklik soliq va statistika hisobotlari muddatlari to'liq kiritildi.</p>
-</div>
+<div class="view" id="v-rep"><a class="back" href="#">← Bosh sahifa</a><div class="card"><h2>🔔 Firmalar hisobotlari</h2>
+<div class="g2"><div><label>Firma</label><input id="r_f"></div><div><label>Hisobot / soliq</label><input id="r_h" placeholder="QQS"></div></div>
+<div class="g2"><div><label>Davr</label><select id="r_t"><option value="m">Har oy</option><option value="q">Har chorak</option><option value="y">Har yil</option></select></div><div><label>Kun</label><input id="r_d" type="number" min="1" max="31" value="20"></div></div>
+<div id="r_my" style="display:none"><label>Oy (yillik uchun, 1–12)</label><input id="r_o" type="number" min="1" max="12" value="3"></div>
+<button class="btn" id="r_a">Qo‘shish</button><button class="btn s" id="r_x">📊 Excel (.csv)</button>
+<p class="note">Choraklik hisobot yanvar, aprel, iyul, oktyabr oylarida topshiriladi.</p><div class="sc" id="r_l"></div></div></div>
 
 </div>
-
 <script>
-const $=id=>document.getElementById(id);
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const num=v=>{const n=parseFloat(String(v).replace(/\s/g,'').replace(',','.'));return isFinite(n)?n:0};
+const fmt=n=>(Math.round(n*100)/100).toLocaleString('ru-RU',{maximumFractionDigits:2}).replace(/[\u00a0\u202f]/g,' ');
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const store={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+const out=(id,rows)=>$('#'+id).innerHTML=rows.map(([a,b])=>`<div class="r"><span>${a}</span><b>${b}</b></div>`).join('');
+const today=()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')};
+const dmy=s=>s?s.split('-').reverse().join('.'):'';
+function csv(name,rows){const t='\ufeff'+rows.map(r=>r.map(c=>'"'+String(c).replace(/"/g,'""')+'"').join(';')).join('\r\n');const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([t],{type:'text/csv'}));a.download=name;a.click()}
 
-// Search filtering on home page
-$('q').addEventListener('input',()=>{
- const v=$('q').value.trim().toLowerCase();let any=false;
- document.querySelectorAll('.card').forEach(t=>{const m=!v||(t.textContent+' '+t.dataset.k).toLowerCase().includes(v);t.style.display=m?'':'none';if(m)any=true});
- document.querySelectorAll('.cat').forEach(c=>{c.style.display=[...c.querySelectorAll('.card')].some(t=>t.style.display!=='none')?'':'none'});
- $('no').style.display=any?'none':'block'});
+/* Bosh sahifa */
+const CATS=[
+['🧮 Hisob-kitoblar','Tez va aniq hisoblash kalkulyatorlari',[['💰','QQS kalkulyatori','QQS qo‘shish va ajratish','qqs','qqs soliq qo‘shilgan qiymat'],['👥','Ish haqi','Brutto va netto, JShDS, INPS','pay','ish haqi maosh brutto netto jshds inps ijtimoiy'],['🏭','Amortizatsiya','Yillik va oylik hisob, yillar jadvali','amo','amortizatsiya asosiy vositalar eskirish'],['％','Foiz kalkulyatori','Ustama, chegirma, o‘zgarish foizi','pct','foiz ustama chegirma']]],
+['📄 Hujjatlar','Tayyor hujjatlarni tez yaratish',[['🧾','Hisob-faktura','Rekvizitlar saqlanadi, chop etish va PDF','inv','hisob faktura invoice chop pdf rekvizit'],['✍️','Summa so‘z bilan','Raqamni so‘zga aylantirish, tiyin bilan','words','summa so‘zda yozish propis shartnoma'],['📝','Dalolatnoma (akt)','Bajarilgan ishlar, chop etish va PDF','act','akt dalolatnoma bajarilgan ishlar']]],
+['🗂 Ish daftari','Kundalik ish uchun kalendar, baza va daftar',[['📅','Muddatlar kalendari','Hisobot muddatlari, necha kun qolgani','cal','kalendar muddat hisobot soliq'],['🤝','Mijozlar bazasi','Kontragentlar rekvizitlari, qidiruv, Excel','cli','mijoz kontragent baza'],['📒','Xarajatlar daftari','Oylik kirim-chiqim va qoldiq, Excel','exp','xarajat daftar kirim chiqim']]],
+['🔔 Eslatmalar','Muddatlarni o‘tkazib yubormaslik uchun',[['🔔','Firmalar hisobotlari','Qaysi firma qaysi hisobotni qachon topshiradi','rep','soliq eslatma firma excel muddat topshirish hisobot statistika mehnat']]]];
+$('#cats').innerHTML=CATS.map(c=>`<div class="cat"><h2>${c[0]}</h2><p class="d">${c[1]}</p><div class="grid">${c[2].map(t=>`<a class="t" href="#${t[3]}" data-k="${t[4]}"><div class="i">${t[0]}</div><b>${t[1]}</b><span>${t[2]}</span></a>`).join('')}</div></div>`).join('');
+$('#q').addEventListener('input',()=>{const v=$('#q').value.trim().toLowerCase();let any=false;
+$$('.t').forEach(t=>{const m=!v||(t.textContent+' '+t.dataset.k).toLowerCase().includes(v);t.style.display=m?'':'none';if(m)any=true});
+$$('.cat').forEach(c=>c.style.display=[...c.querySelectorAll('.t')].some(t=>t.style.display!=='none')?'':'none');$('#no').style.display=any?'none':'block'});
 
-function openTool(toolId) {
-  $('home-content').style.display = 'none';
-  let panels = document.getElementsByClassName("panel");
-  for (let p of panels) p.style.display = "none";
-  $(toolId).style.display = "block";
-  window.scrollTo(0,0);
-}
+/* Router: hammasi bitta sahifada */
+function route(){const h=location.hash.slice(1);const id=$('#v-'+h)?h:'home';$$('.view').forEach(v=>v.classList.toggle('on',v.id==='v-'+id));scrollTo(0,0);(INIT[id]||(()=>{}))()}
+addEventListener('hashchange',route);
 
-function goHome() {
-  let panels = document.getElementsByClassName("panel");
-  for (let p of panels) p.style.display = "none";
-  $('home-content').style.display = 'block';
-  window.scrollTo(0,0);
-}
+/* Kalkulyatorlar */
+const C={
+qqs(){const s=num($('#q_s').value),r=num($('#q_r').value)/100;let b,v,t;if($('#q_m').value==='add'){b=s;v=s*r;t=s+v}else{t=s;b=s/(1+r);v=t-b}out('q_o',[['QQSsiz summa',fmt(b)+' so‘m'],['QQS summasi',fmt(v)+' so‘m'],['QQS bilan jami',fmt(t)+' so‘m']])},
+pay(){const j=num($('#i_j').value)/100,n=num($('#i_n').value)/100,sc=num($('#i_s').value)/100;let b=num($('#i_b').value);if($('#i_m').value==='n')b=b/(1-j-n);out('i_o',[['Brutto',fmt(b)+' so‘m'],['JShDS',fmt(b*j)+' so‘m'],['INPS',fmt(b*n)+' so‘m'],['Netto (qo‘lga)',fmt(b*(1-j-n))+' so‘m'],['Ijtimoiy soliq (ish beruvchi)',fmt(b*sc)+' so‘m'],['Ish beruvchi jami xarajati',fmt(b*(1+sc))+' so‘m']])},
+amo(){const c=num($('#a_c').value),r=num($('#a_r').value),y=c*r/100;out('a_o',[['Yillik amortizatsiya',fmt(y)+' so‘m'],['Oylik amortizatsiya',fmt(y/12)+' so‘m']]);let h='',rest=c,i=0;if(y>0&&c>0){h='<table><tr><th>Yil</th><th>Amortizatsiya</th><th>Qoldiq</th></tr>';while(rest>0.01&&i<50){i++;const a=Math.min(y,rest);rest-=a;h+=`<tr><td>${i}</td><td>${fmt(a)}</td><td>${fmt(rest)}</td></tr>`}h+='</table>'}$('#a_t').innerHTML=h},
+pct(){const s=num($('#p_s').value),p=num($('#p_p').value)/100;out('p_o',[['Foiz miqdori',fmt(s*p)],['Ustama bilan',fmt(s*(1+p))],['Chegirma bilan',fmt(s*(1-p))]]);const a=num($('#p_a').value),b=num($('#p_b').value);out('p_o2',[['O‘zgarish',a?fmt((b-a)/a*100)+' %':'—'],['Farq',fmt(b-a)]])},
+words(){const x=num($('#s_n').value);$('#s_o').textContent=x>0?sumWords(x):'Natija shu yerda ko‘rinadi…'},
+inv:invDoc,act:actDoc};
 
-function calcQQS() {
-  let sum = parseFloat($('qqs-sum').value) || 0;
-  let rate = parseFloat($('qqs-rate').value) || 0;
-  let qqs = sum * (rate / 100);
-  $('qqs-res').innerHTML = `QQS summasi: ${qqs.toLocaleString()} so‘m<br>QQS bilan umumiy: ${(sum + qqs).toLocaleString()} so‘m`;
-}
+/* Summa so‘z bilan */
+const B=["","bir","ikki","uch","to‘rt","besh","olti","yetti","sakkiz","to‘qqiz"],T=["","o‘n","yigirma","o‘ttiz","qirq","ellik","oltmish","yetmish","sakson","to‘qson"],SC=["","ming","million","milliard","trillion"];
+function w3(n){const s=[],h=Math.floor(n/100),t=Math.floor(n%100/10),o=n%10;if(h)s.push(B[h],"yuz");if(t)s.push(T[t]);if(o)s.push(B[o]);return s.join(" ")}
+function words(n){n=Math.floor(n);if(!n)return"nol";const p=[];let i=0;while(n>0&&i<5){const g=n%1000;if(g)p.unshift(w3(g)+(SC[i]?" "+SC[i]:""));n=Math.floor(n/1000);i++}return p.join(" ")}
+function sumWords(x){if(x>=1e15)return'Juda katta son';let s=Math.floor(x),t=Math.round((x-s)*100);if(t===100){s++;t=0}const w=words(s)+" so‘m"+(t?" "+String(t).padStart(2,'0')+" tiyin":"");return w[0].toUpperCase()+w.slice(1)}
+$('#s_c').onclick=()=>{try{navigator.clipboard.writeText($('#s_o').textContent);$('#s_c').textContent='✓ Nusxalandi'}catch(e){}};
 
-function calcSalary() {
-  let brutto = parseFloat($('sal-sum').value) || 0;
-  let jshds = brutto * 0.12;
-  let inps = brutto * 0.001;
-  $('sal-res').innerHTML = `JShDS (12%): ${jshds.toLocaleString()} so‘m<br>INPS (0.1%): ${inps.toLocaleString()} so‘m<br>Qo‘lga tegadigan (Netto): ${(brutto - jshds - inps).toLocaleString()} so‘m`;
-}
+/* Hisob-faktura */
+let items=[{n:'',q:1,p:0}];
+function drawItems(){$('#f_items').innerHTML=items.map((it,i)=>`<div class="g2" style="grid-template-columns:2fr .7fr 1fr auto;margin-bottom:6px"><input placeholder="Nomi" value="${esc(it.n)}" data-i="${i}" data-f="n"><input placeholder="Soni" value="${it.q}" data-i="${i}" data-f="q" inputmode="decimal"><input placeholder="Narxi" value="${it.p||''}" data-i="${i}" data-f="p" inputmode="decimal"><button class="x" data-del="${i}">✕</button></div>`).join('')}
+$('#f_items').addEventListener('input',e=>{const d=e.target.dataset;if(d.i!==undefined){items[d.i][d.f]=d.f==='n'?e.target.value:num(e.target.value)}});
+$('#f_items').addEventListener('click',e=>{const i=e.target.dataset.del;if(i!==undefined&&items.length>1){items.splice(i,1);drawItems();invDoc()}});
+$('#f_add').onclick=()=>{items.push({n:'',q:1,p:0});drawItems()};
+function invDoc(){const g=id=>$('#'+id).value;store.set('zv_req',{s:g('f_s'),i:g('f_si'),b:g('f_sb')});
+const sum=items.reduce((a,x)=>a+x.q*x.p,0),m=g('f_v');let v=0,tot=sum;if(m==='add'){v=sum*.12;tot=sum+v}else if(m==='inc'){v=sum*12/112}
+$('#f_doc').innerHTML=`<h3>HISOB-FAKTURA № ${esc(g('f_no'))} · ${dmy(g('f_d'))}</h3><p><b>Sotuvchi:</b> ${esc(g('f_s'))}, STIR ${esc(g('f_si'))}<br>${esc(g('f_sb'))}</p><p><b>Xaridor:</b> ${esc(g('f_b'))}, STIR ${esc(g('f_bi'))}</p>
+<table><tr><th>№</th><th>Nomi</th><th>Soni</th><th>Narxi</th><th>Summa</th></tr>${items.map((x,i)=>`<tr><td>${i+1}</td><td>${esc(x.n)}</td><td>${x.q}</td><td>${fmt(x.p)}</td><td>${fmt(x.q*x.p)}</td></tr>`).join('')}</table>
+<p>${m==='none'?'QQS yo‘q':'QQS 12%: <b>'+fmt(v)+'</b> so‘m'}<br><b>Jami to‘lov: ${fmt(tot)} so‘m</b></p><p><i>${sumWords(tot)}</i></p><p style="margin-top:30px">Sotuvchi: ____________ &nbsp;&nbsp;&nbsp; Xaridor: ____________</p>`}
 
-function calcAmort() {
-  let val = parseFloat($('am-val').value) || 0;
-  let rate = parseFloat($('am-rate').value) || 0;
-  let yillik = val * (rate / 100);
-  $('am-res').innerHTML = `Yillik: ${yillik.toLocaleString()} so‘m<br>Oylik: ${(yillik / 12).toLocaleString()} so‘m`;
-}
+/* Akt */
+function actDoc(){const g=id=>$('#'+id).value,m=num(g('t_m')),v=g('t_v')==='12'?m*12/112:0;
+$('#t_doc').innerHTML=`<h3>BAJARILGAN ISHLAR DALOLATNOMASI № ${esc(g('t_no'))}</h3><p style="text-align:center">${dmy(g('t_d'))}${g('t_k')?' · Shartnoma: '+esc(g('t_k')):''}</p>
+<p><b>Ijrochi:</b> ${esc(g('t_s'))}<br><b>Buyurtmachi:</b> ${esc(g('t_b'))}</p><p><b>Bajarilgan ishlar:</b><br>${esc(g('t_x')).replace(/\n/g,'<br>')}</p>
+<p><b>Jami: ${fmt(m)} so‘m</b>${v?' (shu jumladan QQS 12%: '+fmt(v)+' so‘m)':''}<br><i>${m>0?sumWords(m):''}</i></p><p>Buyurtmachi ishlar hajmi va sifati bo‘yicha e’tiroz bildirmaydi.</p><p style="margin-top:30px">Ijrochi: ____________ &nbsp;&nbsp;&nbsp; Buyurtmachi: ____________</p>`}
 
-function calcPercent() {
-  let val = parseFloat($('p-val').value) || 0;
-  let rate = parseFloat($('p-rate').value) || 0;
-  let p = val * (rate / 100);
-  $('p-res').innerHTML = `Foiz miqdori: ${p.toLocaleString()} so‘m<br>Qo‘shilganda: ${(val + p).toLocaleString()} so‘m<br>Chegirma bilan: ${(val - p).toLocaleString()} so‘m`;
-}
+/* Muddatlar */
+function nextDue(type,day,mon){const t=new Date();t.setHours(0,0,0,0);let best=null;for(let y=t.getFullYear();y<=t.getFullYear()+1;y++){const ms=type==='m'?[0,1,2,3,4,5,6,7,8,9,10,11]:type==='q'?[0,3,6,9]:[mon-1];for(const m of ms){const dim=new Date(y,m+1,0).getDate(),d=new Date(y,m,Math.min(day,dim));if(d>=t&&(!best||d<best))best=d}}return best&&{d:best,n:Math.round((best-t)/864e5)}}
+const bdg=n=>`<span class="bdg ${n<=3?'w2':n<=7?'w1':''}">${n===0?'bugun':n+' kun'}</span>`;
+const dstr=d=>d.toLocaleDateString('ru-RU');
+const RULES=[['Statistika hisoboti','m',4],['JShDS va ijtimoiy soliq hisobotlari','m',15],['QQS hisoboti va to‘lovi','m',20],['Foyda solig‘i bo‘yicha oylik bo‘nak','m',25],['Mol-mulk va yer solig‘i hisobotlari (chorak)','q',15]];
+function drawCal(){$('#k_l').innerHTML='<table><tr><th>Hisobot</th><th>Sana</th><th>Qoldi</th></tr>'+RULES.map(r=>({t:r[0],...nextDue(r[1],r[2])})).sort((a,b)=>a.n-b.n).map(r=>`<tr><td>${r.t}</td><td>${dstr(r.d)}</td><td>${bdg(r.n)}</td></tr>`).join('')+'</table>'}
 
-function convertNum() {
-  let n = $('w-num').value;
-  $('w-res').innerText = n ? Number(n).toLocaleString() + " so‘m" : 'Natija bu yerda ko‘rinadi...';
-}
+/* Mijozlar */
+let cl=store.get('zv_cl',[]);
+function drawCl(){const q=$('#c_q').value.toLowerCase();$('#c_l').innerHTML='<table><tr><th>Kompaniya</th><th>STIR</th><th>Tel</th><th></th></tr>'+cl.map((c,i)=>({c,i})).filter(({c})=>!q||(c.n+c.i+c.p).toLowerCase().includes(q)).map(({c,i})=>`<tr><td>${esc(c.n)}</td><td>${esc(c.i)}</td><td>${esc(c.p)}</td><td><button class="x" data-d="${i}">🗑</button></td></tr>`).join('')+'</table>'}
+$('#c_a').onclick=()=>{if(!$('#c_n').value.trim())return;cl.push({n:$('#c_n').value.trim(),i:$('#c_i').value.trim(),p:$('#c_p').value.trim()});store.set('zv_cl',cl);['c_n','c_i','c_p'].forEach(i=>$('#'+i).value='');drawCl()};
+$('#c_l').onclick=e=>{const i=e.target.dataset.d;if(i!==undefined){cl.splice(i,1);store.set('zv_cl',cl);drawCl()}};
+$('#c_q').oninput=drawCl;
+$('#c_x').onclick=()=>csv('mijozlar.csv',[['Kompaniya','STIR','Telefon'],...cl.map(c=>[c.n,c.i,c.p])]);
 
-let clients = JSON.parse(localStorage.getItem('zevs_clients') || '[]');
-let expenses = JSON.parse(localStorage.getItem('zevs_expenses') || '[]');
+/* Xarajatlar */
+let ex=store.get('zv_ex',[]);
+function drawEx(){const m=$('#e_m').value,L=ex.map((x,i)=>({x,i})).filter(({x})=>!m||x.d.startsWith(m));let k=0,c=0;L.forEach(({x})=>x.t==='in'?k+=x.s:c+=x.s);
+out('e_o',[['Kirim',fmt(k)],['Chiqim',fmt(c)],['Qoldiq',fmt(k-c)]]);
+$('#e_l').innerHTML='<table><tr><th>Sana</th><th>Nomi</th><th>Summa</th><th></th></tr>'+L.map(({x,i})=>`<tr><td>${dmy(x.d)}</td><td>${esc(x.n)}</td><td style="color:${x.t==='in'?'#0a8f4f':'#b42318'}">${x.t==='in'?'+':'−'}${fmt(x.s)}</td><td><button class="x" data-d="${i}">🗑</button></td></tr>`).join('')+'</table>'}
+$('#e_a').onclick=()=>{const s=num($('#e_s').value);if(!s)return;ex.push({t:$('#e_t').value,d:$('#e_d').value||today(),n:$('#e_n').value.trim(),s});store.set('zv_ex',ex);$('#e_n').value=$('#e_s').value='';drawEx()};
+$('#e_l').onclick=e=>{const i=e.target.dataset.d;if(i!==undefined){ex.splice(i,1);store.set('zv_ex',ex);drawEx()}};
+$('#e_m').onchange=drawEx;
+$('#e_x').onclick=()=>csv('xarajatlar.csv',[['Sana','Turi','Nomi','Summa'],...ex.filter(x=>x.d.startsWith($('#e_m').value)).map(x=>[dmy(x.d),x.t==='in'?'Kirim':'Chiqim',x.n,x.s])]);
 
-function renderClients() {
-  let list = $('cl-list');
-  if(!clients.length) { list.innerHTML = '<tr><td colspan="3" style="text-align:center;color:var(--mu)">Mijozlar yo‘q</td></tr>'; return; }
-  list.innerHTML = clients.map((c, i) => `<tr><td>${c.name}</td><td>${c.inn}</td><td><button class="del-btn" onclick="delClient(${i})">✕</button></td></tr>`).join('');
-}
+/* Firmalar hisobotlari */
+let rp=store.get('zv_rp',[]);const TN={m:'Har oy',q:'Har chorak',y:'Har yil'};
+function drawRp(){$('#r_my').style.display=$('#r_t').value==='y'?'block':'none';
+$('#r_l').innerHTML='<table><tr><th>Firma</th><th>Hisobot</th><th>Davr</th><th>Sana</th><th>Qoldi</th><th></th></tr>'+rp.map((r,i)=>({r,i,...nextDue(r.t,r.d,r.o)})).sort((a,b)=>a.n-b.n).map(x=>`<tr><td>${esc(x.r.f)}</td><td>${esc(x.r.h)}</td><td>${TN[x.r.t]}</td><td>${dstr(x.d)}</td><td>${bdg(x.n)}</td><td><button class="x" data-d="${x.i}">🗑</button></td></tr>`).join('')+'</table>'}
+$('#r_t').onchange=drawRp;
+$('#r_a').onclick=()=>{if(!$('#r_f').value.trim())return;rp.push({f:$('#r_f').value.trim(),h:$('#r_h').value.trim(),t:$('#r_t').value,d:Math.min(31,Math.max(1,num($('#r_d').value)||1)),o:Math.min(12,Math.max(1,num($('#r_o').value)||1))});store.set('zv_rp',rp);$('#r_f').value=$('#r_h').value='';drawRp()};
+$('#r_l').onclick=e=>{const i=e.target.dataset.d;if(i!==undefined){rp.splice(i,1);store.set('zv_rp',rp);drawRp()}};
+$('#r_x').onclick=()=>csv('hisobotlar.csv',[['Firma','Hisobot','Davr','Kun'],...rp.map(r=>[r.f,r.h,TN[r.t],r.d])]);
 
-function addClient() {
-  let name = $('cl-name').value;
-  let inn = $('cl-inn').value;
-  if(!name) return alert('Kompaniya nomini kiriting!');
-  clients.push({name, inn});
-  localStorage.setItem('zevs_clients', JSON.stringify(clients));
-  renderClients();
-  $('cl-name').value = ''; $('cl-inn').value = '';
-}
-
-function delClient(i) {
-  clients.splice(i, 1);
-  localStorage.setItem('zevs_clients', JSON.stringify(clients));
-  renderClients();
-}
-
-function renderExpenses() {
-  let list = $('ex-list');
-  if(!expenses.length) { list.innerHTML = '<tr><td colspan="3" style="text-align:center;color:var(--mu)">Xarajatlar yo‘q</td></tr>'; return; }
-  list.innerHTML = expenses.map((e, i) => `<tr><td>${e.name}</td><td>${Number(e.sum).toLocaleString()} so‘m</td><td><button class="del-btn" onclick="delExpense(${i})">✕</button></td></tr>`).join('');
-}
-
-function addExpense() {
-  let name = $('ex-name').value;
-  let sum = $('ex-sum').value;
-  if(!name) return alert('Xarajat nomini kiriting!');
-  expenses.push({name, sum});
-  localStorage.setItem('zevs_expenses', JSON.stringify(expenses));
-  renderExpenses();
-  $('ex-name').value = ''; $('ex-sum').value = '';
-}
-
-function delExpense(i) {
-  expenses.splice(i, 1);
-  localStorage.setItem('zevs_expenses', JSON.stringify(expenses));
-  renderExpenses();
-}
-
-function exportExcel(type) {
-  let data = type === 'clients' ? clients : expenses;
-  if(!data.length) return alert("Yuklab olish uchun ma'lumot yo'q!");
-  let csvContent = "\uFEFF";
-  if(type === 'clients') {
-    csvContent += "Kompaniya Nomi,STIR (INN)\n";
-    data.forEach(item => csvContent += `"${item.name}","${item.inn}"\n`);
-  } else {
-    csvContent += "Xarajat Nomi,Summa (so'm)\n";
-    data.forEach(item => csvContent += `"${item.name}","${item.sum}"\n`);
-  }
-  let blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-  let link = document.createElement("a");
-  link.href = URL.createObjectURL(blob);
-  link.setAttribute("download", `${type}_baza.csv`);
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-}
-
-// Excel fayldan olingan barcha 145 ta firma va qoidalar bazasi
-const firmsData = [
-  {name: "DEVOR INVESTMENT VA KOMPANIYA KOMMANDIT SHIRKAT KSH", report: "Investitsiya faoliyati (oylik)", date: "06.11.2026"},
-  {name: "XON SAROY FINANCE MCHJ", report: "Investitsiya faoliyati (oylik)", date: "06.11.2026"},
-  {name: "XONSAROY GROUP MCHJ", report: "Faoliyat statistikasi (oylik)", date: "15.11.2026"},
-  {name: "DEVOR INVESTMENT VA KOMPANIYA KOMMANDIT SHIRKAT KSH", report: "Faoliyat statistikasi (oylik)", date: "15.11.2026"},
-  {name: "XON SAROY FINANCE MCHJ", report: "Faoliyat statistikasi (oylik)", date: "15.11.2026"},
-  {name: "ZO'RSAN RESIDENCE DEVELOPER MCHJ", report: "Daromad solig‘i", date: "15.11.2026"},
-  {name: "RED HOUSE DEVELOPER MCHJ", report: "Daromad solig‘i", date: "15.11.2026"},
-  {name: "OCEAN-RESIDENCE MCHJ", report: "Daromad solig‘i", date: "15.11.2026"},
-  {name: "G R E A T C I T Y MCHJ", report: "Daromad solig‘i", date: "15.11.2026"},
-  {name: "VATAN RESIDENCE MCHJ", report: "Daromad solig‘i", date: "15.11.2026"},
-  {name: "SOWA DIGITAL AGENCY MCHJ", report: "Daromad solig‘i", date: "15.11.2026"},
-  {name: "APELSIN RESIDENCE MCHJ", report: "Daromad solig‘i", date: "15.11.2026"},
-  {name: "MEBEL HOUSE BEST MCHJ", report: "Daromad solig‘i", date: "15.11.2026"},
-  {name: "BARAKAT HOUSE MCHJ", report: "Daromad solig‘i", date: "15.11.2026"},
-  {name: "AFSONA RESIDENCE MCHJ", report: "Daromad solig‘i", date: "15.11.2026"},
-  {name: "BAXT SAROYI APARTAMENT MCHJ", report: "Daromad solig‘i", date: "15.11.2026"},
-  {name: "SHIRIN HAYOT RESIDENCE MCHJ", report: "Daromad solig‘i", date: "15.11.2026"},
-  {name: "XONSAROY TOWER BUILD MCHJ", report: "Daromad solig‘i", date: "15.11.2026"},
-  {name: "XONSAROY PREMIUM TOWER MCHJ", report: "Daromad solig‘i", date: "15.11.2026"},
-  {name: "BAHOR RESIDENCE MCHJ", report: "Daromad solig‘i", date: "15.11.2026"},
-  {name: "ARZON UY KAFOLAT MCHJ", report: "Daromad solig‘i", date: "15.11.2026"},
-  {name: "GRAND HOUSE BUILD MCHJ", report: "Daromad solig‘i", date: "15.11.2026"},
-  {name: "ZAM-ZAM RESIDENCE MCHJ", report: "Daromad solig‘i", date: "15.11.2026"},
-  {name: "XONSAROY MEBEL MCHJ", report: "Daromad solig‘i", date: "15.11.2026"},
-  {name: "XONSAROY BUSINESS CENTER MCHJ", report: "Daromad solig‘i", date: "15.11.2026"},
-  {name: "XONSAROY TRADE MCHJ", report: "Daromad solig‘i", date: "15.11.2026"},
-  {name: "XONSAROY PLAZA MCHJ", report: "Daromad solig‘i", date: "15.11.2026"},
-  {name: "GRAND BULDING SERVIS MCHJ", report: "Daromad solig‘i", date: "15.11.2026"},
-  {name: "GRAND STROY SERVIS MCHJ", report: "Daromad solig‘i", date: "15.11.2026"},
-  {name: "TOSHKENT UY JOY SERVIS MCHJ", report: "Daromad solig‘i", date: "15.11.2026"},
-  {name: "INVESTBRIDGE MCHJ", report: "Daromad solig‘i", date: "15.11.2026"},
-  {name: "BAXTI DEGIRMONI MCHJ", report: "Daromad solig‘i", date: "15.11.2026"},
-  {name: "TOSHKENT G'isht ISHLAB CHIQARISH MCHJ", report: "Daromad solig‘i", date: "15.11.2026"},
-  {name: "TOSHKENT SEMENT ISHLAB CHIQARISH MCHJ", report: "Daromad solig‘i", date: "15.11.2026"},
-  {name: "TOSHKENT ARMATURA ISHLAB CHIQARISH MCHJ", report: "Daromad solig‘i", date: "15.11.2026"},
-  {name: "XONSAROY LOGISTIK MCHJ", report: "Daromad solig‘i", date: "15.11.2026"},
-  {name: "XONSAROY INVEST MCHJ", report: "Daromad solig‘i", date: "15.11.2026"},
-  {name: "XONSAROY TURIST MCHJ", report: "Daromad solig‘i", date: "15.11.2026"},
-  {name: "XONSAROY KONSALTING MCHJ", report: "Daromad solig‘i", date: "15.11.2026"},
-  {name: "XONSAROY AVTO MCHJ", report: "Daromad solig‘i", date: "15.11.2026"},
-  {name: "XONSAROY REMONT MCHJ", report: "Daromad solig‘i", date: "15.11.2026"},
-  {name: "XONSAROY SECURITY MCHJ", report: "Daromad solig‘i", date: "15.11.2026"},
-  {name: "XONSAROY DESIGN MCHJ", report: "Daromad solig‘i", date: "15.11.2026"},
-  {name: "XONSAROY ARCHITECT MCHJ", report: "Daromad solig‘i", date: "15.11.2026"},
-  {name: "XONSAROY IT SOLUTIONS MCHJ", report: "Daromad solig‘i", date: "15.11.2026"},
-  {name: "XONSAROY MEDIA MCHJ", report: "Daromad solig‘i", date: "15.11.2026"},
-  {name: "XONSAROY MARKETING MCHJ", report: "Daromad solig‘i", date: "15.11.2026"},
-  {name: "XONSAROY EVENTS MCHJ", report: "Daromad solig‘i", date: "15.11.2026"},
-  {name: "XONSAROY TEXTILE MCHJ", report: "Daromad solig‘i", date: "15.11.2026"},
-  {name: "XONSAROY AGRO MCHJ", report: "Daromad solig‘i", date: "15.11.2026"},
-  {name: "XONSAROY PHARM MCHJ", report: "Daromad solig‘i", date: "15.11.2026"},
-  {name: "XONSAROY MEDICAL MCHJ", report: "Daromad solig‘i", date: "15.11.2026"},
-  {name: "XONSAROY ECO MCHJ", report: "Daromad solig‘i", date: "15.11.2026"},
-  {name: "XONSAROY ENERGY MCHJ", report: "Daromad solig‘i", date: "15.11.2026"},
-  {name: "XONSAROY WATER MCHJ", report: "Daromad solig‘i", date: "15.11.2026"},
-  {name: "XONSAROY GAS MCHJ", report: "Daromad solig‘i", date: "15.11.2026"},
-  {name: "XONSAROY OIL MCHJ", report: "Daromad solig‘i", date: "15.11.2026"},
-  {name: "XONSAROY STEEL MCHJ", report: "Daromad solig‘i", date: "15.11.2026"},
-  {name: "XONSAROY WOOD MCHJ", report: "Daromad solig‘i", date: "15.11.2026"},
-  {name: "XONSAROY GLASS MCHJ", report: "Daromad solig‘i", date: "15.11.2026"},
-  {name: "XONSAROY PLASTIC MCHJ", report: "Daromad solig‘i", date: "15.11.2026"},
-  {name: "XONSAROY PAPER MCHJ", report: "Daromad solig‘i", date: "15.11.2026"},
-  {name: "XONSAROY CEMENT MCHJ", report: "Daromad solig‘i", date: "15.11.2026"},
-  {name: "XONSAROY BRICK MCHJ", report: "Daromad solig‘i", date: "15.11.2026"},
-  {name: "XONSAROY TILE MCHJ", report: "Daromad solig‘i", date: "15.11.2026"},
-  {name: "XONSAROY PAINT MCHJ", report: "Daromad solig‘i", date: "15.11.2026"},
-  {name: "XONSAROY PIPE MCHJ", report: "Daromad solig‘i", date: "15.11.2026"},
-  {name: "XONSAROY CABLE MCHJ", report: "Daromad solig‘i", date: "15.11.2026"},
-  {name: "XONSAROY LIGHT MCHJ", report: "Daromad solig‘i", date: "15.11.2026"},
-  {name: "XONSAROY LOCK MCHJ", report: "Daromad solig‘i", date: "15.11.2026"},
-  // Choraklik va boshqa qoidalar (Barcha 145 ta to'liq kiritildi)
-  {name: "XONSAROY GROUP MCHJ", report: "Mehnat hisoboti", date: "15-kun (har chorak)"},
-  {name: "YANGI MUXTASHAM-SAROY MCHJ", report: "Mehnat hisoboti", date: "15-kun (har chorak)"},
-  {name: "DEVOR INVESTMENT VA KOMPANIYA KOMMANDIT SHIRKAT KSH", report: "Mehnat hisoboti", date: "15-kun (har chorak)"},
-  {name: "XON SAROY FINANCE MCHJ", report: "Mehnat hisoboti", date: "15-kun (har chorak)"},
-  {name: "XONSAROY GROUP MCHJ", report: "Moliyaviy statistika", date: "18-kun (har chorak)"},
-  {name: "YANGI MUXTASHAM-SAROY MCHJ", report: "Moliyaviy statistika", date: "18-kun (har chorak)"},
-  {name: "DEVOR INVESTMENT VA KOMPANIYA KOMMANDIT SHIRKAT KSH", report: "Moliyaviy statistika", date: "18-kun (har chorak)"},
-  {name: "XON SAROY FINANCE MCHJ", report: "Moliyaviy statistika", date: "18-kun (har chorak)"},
-  {name: "ALMAZA CITY MCHJ", report: "Faoliyat so‘rovnomasi", date: "15-kun (har chorak)"},
-  {name: "INVESTBRIDGE MCHJ", report: "Faoliyat so‘rovnomasi", date: "15-kun (har chorak)"}
-];
-
-function renderFirms() {
-  let tb = $('firms-table-body');
-  if(!tb) return;
-  tb.innerHTML = firmsData.map(f => `<tr><td><b>${f.name}</b></td><td>${f.report}</td><td>${f.date}</td></tr>`).join('');
-}
-
-renderClients();
-renderExpenses();
-renderFirms();
-
-let th = localStorage.getItem('bxh');
-if(th) document.documentElement.dataset.theme = th;
-$('th').onclick = () => {
-  let d = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
-  document.documentElement.dataset.theme = d;
-  localStorage.setItem('bxh', d);
-};
+/* Ishga tushirish */
+const INIT={cal:drawCal,cli:drawCl,exp:drawEx,rep:drawRp,inv(){invDoc()},act(){actDoc()}};
+$$('.view[data-c]').forEach(v=>{const f=C[v.dataset.c];v.addEventListener('input',f);v.addEventListener('change',f);f()});
+$('#f_d').value=$('#t_d').value=$('#e_d').value=today();$('#e_m').value=today().slice(0,7);
+const rq=store.get('zv_req',null);if(rq){$('#f_s').value=rq.s;$('#f_si').value=rq.i;$('#f_sb').value=rq.b}
+drawItems();invDoc();actDoc();
+let th=store.get('bxh',null);if(th)document.documentElement.dataset.theme=th;
+$('#th').onclick=()=>{const d=document.documentElement.dataset.theme||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'),n=d==='dark'?'light':'dark';document.documentElement.dataset.theme=n;store.set('bxh',n)};
+route();
 </script>
 </body>
 </html>
