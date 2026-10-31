@@ -150,9 +150,9 @@ $$('.t').forEach(t=>{const m=!v||(t.textContent+' '+t.dataset.k).toLowerCase().i
 $$('.cat').forEach(c=>c.style.display=[...c.querySelectorAll('.t')].some(t=>t.style.display!=='none')?'':'none');$('#no').style.display=any?'none':'block'});
 
 /* Router: hammasi bitta sahifada */
-function route(){const h=location.hash.slice(1);const id=$('#v-'+h)?h:'home';$$('.view').forEach(v=>v.classList.toggle('on',v.id==='v-'+id));scrollTo(0,0);(INIT[id]||(()=>{}))()}
+function route(){const h=location.hash.slice(1);if(h==='rep'){location.replace('firmalar.html');return}const id=$('#v-'+h)?h:'home';$$('.view').forEach(v=>v.classList.toggle('on',v.id==='v-'+id));scrollTo(0,0);(INIT[id]||(()=>{}))()}
 addEventListener('hashchange',route);
-
+  
 /* Kalkulyatorlar */
 const C={
 qqs(){const s=num($('#q_s').value),r=num($('#q_r').value)/100;let b,v,t;if($('#q_m').value==='add'){b=s;v=s*r;t=s+v}else{t=s;b=s/(1+r);v=t-b}out('q_o',[['QQSsiz summa',fmt(b)+' so‘m'],['QQS summasi',fmt(v)+' so‘m'],['QQS bilan jami',fmt(t)+' so‘m']])},
