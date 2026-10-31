@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Firmalar hisobotlari · Zevs</title>
+<style>
+:root{--bg:#f2f5f7;--card:#fff;--tx:#17212b;--mut:#667085;--bd:#e1e6eb;--ac:#0f766e;--ok:#15803d;--warn:#b45309;--bad:#b91c1c;--okb:#dcfce7;--warnb:#fef3c7;--badb:#fee2e2}
+:root[data-theme=dark]{--bg:#0f1318;--card:#19202a;--tx:#e8ecf1;--mut:#97a2b3;--bd:#28313d;--ac:#2dd4bf;--ok:#4ade80;--warn:#fbbf24;--bad:#f87171;--okb:#12301f;--warnb:#3a2c0c;--badb:#3d1717}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;}
+.wrap{max-width:820px;margin:-36px auto 0;padding:0 14px max(40px,env(safe-area-inset-bottom))}
+a{color:var(--ac);text-decoration:none}
+.hd{background:linear-gradient(135deg,#0f766e,#0e5a6b);color:#fff;padding:calc(26px + env(safe-area-inset-top,0px)) 16px 62px}
+.hd>div{max-width:820px;margin:0 auto;display:flex;justify-content:space-between;gap:12px}
+.hd h1{font-size:25px;margin:0}.hd p{margin:4px 0 0;font-size:14px;opacity:.88}
+#theme{border:0;background:rgba(255,255,255,.18);color:#fff;border-radius:50%;width:40px;height:40px;font-size:18px;padding:0;flex:none}
+.back{display:inline-block;background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:8px 14px;color:var(--tx);font-size:14px;box-shadow:0 2px 10px rgba(16,24,40,.08)}
+.ttl{font-size:19px;margin:16px 0 2px}
+.sub{color:var(--mut);margin:0 0 14px;font-size:14px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:14px 16px;margin-bottom:12px}
+button,select,input{font:inherit;color:var(--tx);background:var(--bg);border:1px solid var(--bd);border-radius:8px;padding:7px 10px}
+button{cursor:pointer}
+button.p{background:var(--ac);border-color:var(--ac);color:#fff}
+:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.row input[type=search]{flex:1;min-width:150px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px}
+.stat{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:8px 10px}
+.stat b{display:block;font-size:20px}
+.stat span{color:var(--mut);font-size:13px}
+.stat.bad b{color:var(--bad)}.stat.warn b{color:var(--warn)}.stat.ok b{color:var(--ok)}
+.grp h3{margin:14px 0 6px;font-size:15px;display:flex;justify-content:space-between}
+.grp h3 small{color:var(--mut);font-weight:400}
+.it{display:flex;gap:10px;align-items:center;padding:8px 10px;border:1px solid var(--bd);border-radius:10px;background:var(--card);margin-bottom:6px;cursor:pointer}
+.it input{width:20px;height:20px;flex:none}
+.it .n{flex:1;min-width:0}
+.it .n small{display:block;color:var(--mut)}
+.tag{font-size:13px;padding:2px 8px;border-radius:99px;background:var(--bd);white-space:nowrap}
+.it.bad{border-color:var(--bad);background:var(--badb)}
+.it.warn{border-color:var(--warn);background:var(--warnb)}
+.it.ok{background:var(--okb);opacity:.75}
+.it.ok .n b{text-decoration:line-through}
+table{width:100%;border-collapse:collapse}
+td,th{padding:4px 6px;text-align:left;border-bottom:1px solid var(--bd)}
+td input[type=number]{width:64px}
+summary{cursor:pointer;font-weight:600}
+.empty{text-align:center;color:var(--mut);padding:18px}
+@media(max-width:560px){.stats{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<div class="hd"><div><div><h1>⚡ Zevs</h1><p>Buxgalter markazi · barcha ish asboblaringiz bir joyda, bo‘limlarga ajratilgan.</p></div><button id="theme" title="Mavzu">🌓</button></div></div>
+<div class="wrap">
+  <a class="back" href="./">← Bosh sahifa</a>
+  <h2 class="ttl">🔔 Firmalar hisobotlari</h2>
+  <p class="sub">Qaysi firma qaysi hisobotni qachon topshiradi. Topshirilganini belgilab boring.</p>
+
+  <div class="card row">
+    <input type="month" id="ym" aria-label="Oy">
+    <input type="search" id="q" placeholder="Firma yoki STIR bo‘yicha qidirish" aria-label="Qidirish">
+    <select id="rt" aria-label="Soliq turi"><option value="">Barcha soliq turlari</option></select>
+    <select id="fl" aria-label="Filtr">
+      <option value="all">Hammasi</option>
+      <option value="open">Topshirilmaganlar</option>
+      <option value="bad">Muddati o‘tganlar</option>
+    </select>
+  </div>
+
+  <div class="stats" id="stats"></div>
+  <div id="list"></div>
+
+  <div class="card">
+    <details>
+      <summary>⚙️ Ma‘lumotlar va sozlamalar</summary>
+      <p class="sub" style="margin-top:10px">Firmalar ro‘yxatini Excel (.xlsx) fayldan yuklang. Ma‘lumot faqat shu brauzerda saqlanadi, GitHubga chiqmaydi. Qayta yuklasangiz, belgilangan topshirishlar saqlanib qoladi.</p>
+      <div class="row" style="margin-bottom:10px">
+        <button class="p" id="imp">📥 Excel yuklash</button>
+        <button id="exp">💾 Zaxira nusxa (.json)</button>
+        <button id="imp2">♻️ Zaxirani tiklash</button>
+        <input type="file" id="file" accept=".xlsx,.xls,.csv,.json" hidden>
+      </div>
+      <p style="margin:6px 0"><b>Hisobot turlari</b> — kun, davriylik va yoqish/o‘chirish:</p>
+      <div style="overflow-x:auto"><table id="rep"></table></div>
+      <p class="sub" style="margin-top:8px">Muddat dam olish kuniga to‘g‘ri kelsa, keyingi ish kuniga ko‘chiriladi. Bayram kunlari hisobga olinmaydi.</p>
+    </details>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script>
+const LS='zevs_firmalar_v1', TH='zevs_firmalar_theme';
+const CORE=[
+  {key:'qqs',name:'QQS hisoboti',day:20,freq:'m',core:1,onlyQqs:1,on:1},
+  {key:'daromad',name:'Daromad solig‘i (JShDS)',day:15,freq:'m',core:1,on:1},
+  {key:'ijtimoiy',name:'Ijtimoiy soliq',day:15,freq:'m',core:1,on:1},
+  {key:'foyda',name:'Foyda solig‘i',day:20,freq:'q',core:1,on:1}
+];
+const MN=['yanvar','fevral','mart','aprel','may','iyun','iyul','avgust','sentabr','oktabr','noyabr','dekabr'];
+const WD=['yakshanba','dushanba','seshanba','chorshanba','payshanba','juma','shanba'];
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+let S=load();
+function load(){
+  try{const s=JSON.parse(localStorage.getItem(LS));if(s&&s.firms)return s;}catch(e){}
+  return {firms:[],reports:CORE.map(r=>({...r})),done:{}};
+}
+function save(){try{localStorage.setItem(LS,JSON.stringify(S));}catch(e){}}
+
+/* mavzu */
+(function(){
+  let t=null;try{t=JSON.parse(localStorage.getItem('bxh'));}catch(e){}
+  if(!t)t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';
+  document.documentElement.dataset.theme=t;
+})();
+$('#theme').onclick=()=>{
+  const t=document.documentElement.dataset.theme==='dark'?'light':'dark';
+  document.documentElement.dataset.theme=t;
+  try{localStorage.setItem('bxh',JSON.stringify(t));}catch(e){}
+};
+
+/* sanalar */
+function due(y,mi,day){
+  const last=new Date(y,mi+1,0).getDate();
+  const d=new Date(y,mi,Math.min(day,last));
+  while(d.getDay()===0||d.getDay()===6)d.setDate(d.getDate()+1);
+  return d;
+}
+function today(){const d=new Date();d.setHours(0,0,0,0);return d;}
+
+function items(ym){
+  const [y,m]=ym.split('-').map(Number), mi=m-1, out=[];
+  const reps=S.reports.filter(r=>r.on&&(r.freq==='m'||mi%3===0));
+  for(const f of S.firms)for(const r of reps){
+    if(r.onlyQqs&&!f.qqs)continue;
+    if(!r.core&&!(f.extra||[]).includes(r.key))continue;
+    out.push({f,r,due:due(y,mi,r.day),k:f.inn+'|'+r.key+'|'+ym});
+  }
+  return out;
+}
+function stat(it,t){
+  if(S.done[it.k])return 'ok';
+  if(it.due<t)return 'bad';
+  return (it.due-t)/864e5<=3?'warn':'new';
+}
+
+/* chizish */
+function render(){
+  const ym=$('#ym').value;
+  if(!S.firms.length){
+    $('#stats').innerHTML='';
+    $('#list').innerHTML='<div class="card empty">Firmalar ro‘yxati hali yuklanmagan.<br>Pastdagi «Ma‘lumotlar va sozlamalar» bo‘limidan Excel faylni yuklang.</div>';
+    return;
+  }
+  const rt=$('#rt').value, t=today(), all=items(ym).filter(i=>!rt||i.r.key===rt);
+  const c={ok:0,bad:0,warn:0,new:0};
+  all.forEach(i=>c[stat(i,t)]++);
+  $('#stats').innerHTML=
+    `<div class="stat"><b>${all.length}</b><span>Jami</span></div>`+
+    `<div class="stat ok"><b>${c.ok}</b><span>Topshirildi</span></div>`+
+    `<div class="stat warn"><b>${c.warn}</b><span>3 kun ichida</span></div>`+
+    `<div class="stat bad"><b>${c.bad}</b><span>Muddati o‘tgan</span></div>`;
+  const q=$('#q').value.trim().toLowerCase(), fl=$('#fl').value;
+  const rows=all.filter(i=>{
+    const s=stat(i,t);
+    if(fl==='open'&&s==='ok')return false;
+    if(fl==='bad'&&s!=='bad')return false;
+    return !q||(i.f.name+' '+i.f.inn).toLowerCase().includes(q);
+  }).sort((a,b)=>a.due-b.due||a.f.name.localeCompare(b.f.name)||a.r.name.localeCompare(b.r.name));
+  if(!rows.length){$('#list').innerHTML='<div class="card empty">Hech narsa topilmadi.</div>';return;}
+  const g=new Map();
+  rows.forEach(i=>{const k=i.due.getTime();if(!g.has(k))g.set(k,[]);g.get(k).push(i);});
+  let h='';
+  for(const [k,arr] of g){
+    const d=new Date(k), dn=arr.filter(i=>S.done[i.k]).length;
+    h+=`<div class="grp"><h3><span>${d.getDate()}-${MN[d.getMonth()]}, ${WD[d.getDay()]}</span><small>${dn}/${arr.length} topshirildi</small></h3>`;
+    for(const i of arr){
+      const s=stat(i,t);
+      h+=`<label class="it ${s}"><input type="checkbox" data-k="${esc(i.k)}" ${s==='ok'?'checked':''}>`+
+         `<span class="n"><b>${esc(i.f.name)}</b><small>STIR ${esc(i.f.inn)}</small></span>`+
+         `<span class="tag">${esc(i.r.name)}</span></label>`;
+    }
+    h+='</div>';
+  }
+  $('#list').innerHTML=h;
+}
+$('#list').addEventListener('change',e=>{
+  const k=e.target.dataset.k;if(!k)return;
+  if(e.target.checked)S.done[k]=1;else delete S.done[k];
+  save();render();
+});
+
+/* sozlamalar jadvali */
+function fillRt(){
+  const el=$('#rt'), cur=el.value;
+  el.innerHTML='<option value="">Barcha soliq turlari</option>'+S.reports.filter(r=>r.on).map(r=>`<option value="${esc(r.key)}">${esc(r.name)}</option>`).join('');
+  el.value=[...el.options].some(o=>o.value===cur)?cur:'';
+}
+function renderRep(){
+  fillRt();
+  $('#rep').innerHTML='<tr><th></th><th>Hisobot</th><th>Kun</th><th>Davriylik</th></tr>'+
+    S.reports.map((r,i)=>`<tr><td><input type="checkbox" data-i="${i}" data-f="on" ${r.on?'checked':''}></td>`+
+      `<td>${esc(r.name)}</td>`+
+      `<td><input type="number" min="1" max="31" value="${r.day}" data-i="${i}" data-f="day"></td>`+
+      `<td><select data-i="${i}" data-f="freq"><option value="m" ${r.freq==='m'?'selected':''}>Har oy</option><option value="q" ${r.freq==='q'?'selected':''}>Har chorak</option></select></td></tr>`).join('');
+}
+$('#rep').addEventListener('change',e=>{
+  const i=e.target.dataset.i,f=e.target.dataset.f;if(i==null)return;
+  const r=S.reports[i];
+  if(f==='on')r.on=e.target.checked?1:0;
+  else if(f==='day')r.day=Math.min(31,Math.max(1,parseInt(e.target.value)||1));
+  else r.freq=e.target.value;
+  save();fillRt();render();
+});
+
+/* Excel yuklash */
+function doImport(rows){
+  const h=rows.findIndex(r=>r.some(c=>/инн|inn|stir/i.test(String(c))));
+  if(h<0){alert('Sarlavha qatori (INN ustuni) topilmadi.');return false;}
+  const head=rows[h].map(c=>String(c||'').trim());
+  const iInn=head.findIndex(c=>/инн|inn|stir/i.test(c));
+  const iName=head.findIndex(c=>/наименование|nomi|firma/i.test(c));
+  const iQ=head.findIndex(c=>/ққс|qqs|ндс/i.test(c));
+  const from=Math.max(iInn,iName,iQ)+1, cols=[];
+  head.forEach((c,i)=>{
+    if(i<from||!/\d/.test(c))return;
+    const day=parseInt(c.match(/\d+/)[0]);
+    let name=c.replace(/\d+\s*-?\s*(sent|sana)?/ig,' ').replace(/oylik/ig,' ').replace(/\s+/g,' ').trim();
+    name=name.charAt(0).toUpperCase()+name.slice(1).toLowerCase();
+    cols.push({i,day,name,freq:/oylik/i.test(c)?'m':'q',key:'x_'+name.toLowerCase().replace(/[^a-z0-9]+/g,'')});
+  });
+  const firms=[];
+  for(const r of rows.slice(h+1)){
+    const inn=String(r[iInn]||'').replace(/\D/g,'');
+    if(!inn)continue;
+    firms.push({
+      inn,name:String(r[iName]||'').trim(),
+      qqs:iQ>=0&&/qqs|ққс/i.test(String(r[iQ])),
+      extra:cols.filter(c=>/^[xх]$/i.test(String(r[c.i]||'').trim())).map(c=>c.key)
+    });
+  }
+  if(!firms.length){alert('Firmalar topilmadi.');return false;}
+  const old=Object.fromEntries(S.reports.map(r=>[r.key,r]));
+  const core=CORE.map(r=>({...r,...(old[r.key]||{})}));
+  const extra=cols.map(c=>({key:c.key,name:c.name,day:(old[c.key]||c).day,freq:(old[c.key]||c).freq,on:old[c.key]?old[c.key].on:1}));
+  S.firms=firms;S.reports=core.concat(extra);
+  return true;
+}
+$('#imp').onclick=$('#imp2').onclick=()=>$('#file').click();
+$('#file').onchange=async e=>{
+  const f=e.target.files[0];e.target.value='';if(!f)return;
+  try{
+    if(/\.json$/i.test(f.name)){
+      const j=JSON.parse(await f.text());
+      if(!j.firms||!j.reports)throw 0;
+      S=j;
+    }else{
+      const wb=XLSX.read(await f.arrayBuffer(),{type:'array'});
+      const rows=XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]],{header:1,defval:''});
+      if(!doImport(rows))return;
+    }
+    save();renderRep();render();
+  }catch(err){alert('Faylni o‘qib bo‘lmadi. Excel (.xlsx) yoki zaxira (.json) faylni tanlang.');}
+};
+$('#exp').onclick=()=>{
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([JSON.stringify(S)],{type:'application/json'}));
+  a.download='zevs-firmalar-zaxira.json';a.click();
+};
+
+/* boshlash */
+const n=new Date();
+$('#ym').value=n.getFullYear()+'-'+String(n.getMonth()+1).padStart(2,'0');
+$('#ym').onchange=$('#q').oninput=$('#fl').onchange=$('#rt').onchange=render;
+renderRep();render();
+</script>
+</body>
+</html>
