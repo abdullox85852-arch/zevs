@@ -144,13 +144,13 @@ const CATS=[
 ['📄 Hujjatlar','Tayyor hujjatlarni tez yaratish',[['🧾','Hisob-faktura','Rekvizitlar saqlanadi, chop etish va PDF','inv','hisob faktura invoice chop pdf rekvizit'],['✍️','Summa so‘z bilan','Raqamni so‘zga aylantirish, tiyin bilan','words','summa so‘zda yozish propis shartnoma'],['📝','Dalolatnoma (akt)','Bajarilgan ishlar, chop etish va PDF','act','akt dalolatnoma bajarilgan ishlar']]],
 ['🗂 Ish daftari','Kundalik ish uchun kalendar, baza va daftar',[['📅','Muddatlar kalendari','Hisobot muddatlari, necha kun qolgani','cal','kalendar muddat hisobot soliq'],['🤝','Mijozlar bazasi','Kontragentlar rekvizitlari, qidiruv, Excel','cli','mijoz kontragent baza'],['📒','Xarajatlar daftari','Oylik kirim-chiqim va qoldiq, Excel','exp','xarajat daftar kirim chiqim']]],
 ['🔔 Eslatmalar','Muddatlarni o‘tkazib yubormaslik uchun',[['🔔','Firmalar hisobotlari','Qaysi firma qaysi hisobotni qachon topshiradi','rep','soliq eslatma firma excel muddat topshirish hisobot statistika mehnat']]]];
-$('#cats').innerHTML=CATS.map(c=>`<div class="cat"><h2>${c[0]}</h2><p class="d">${c[1]}</p><div class="grid">${c[2].map(t=>`<a class="t" href="#${t[3]}" data-k="${t[4]}"><div class="i">${t[0]}</div><b>${t[1]}</b><span>${t[2]}</span></a>`).join('')}</div></div>`).join('');
+CATS.push(['👔 Kadrlar','Ta‘til puli, hisob-kitob va kasallik varaqasi',[['👔','Kadrlar hisobi','Ta‘til, hisob-kitob va bolnichniy','hr','ta‘til otpusk raschet bolnichniy kasallik kadr xodim']]]);$('#cats').innerHTML=CATS.map(c=>`<div class="cat"><h2>${c[0]}</h2><p class="d">${c[1]}</p><div class="grid">${c[2].map(t=>`<a class="t" href="#${t[3]}" data-k="${t[4]}"><div class="i">${t[0]}</div><b>${t[1]}</b><span>${t[2]}</span></a>`).join('')}</div></div>`).join('');
 $('#q').addEventListener('input',()=>{const v=$('#q').value.trim().toLowerCase();let any=false;
 $$('.t').forEach(t=>{const m=!v||(t.textContent+' '+t.dataset.k).toLowerCase().includes(v);t.style.display=m?'':'none';if(m)any=true});
 $$('.cat').forEach(c=>c.style.display=[...c.querySelectorAll('.t')].some(t=>t.style.display!=='none')?'':'none');$('#no').style.display=any?'none':'block'});
 
 /* Router: hammasi bitta sahifada */
-function route(){const h=location.hash.slice(1);if(h==='rep'){location.replace('firmalar.html');return}const id=$('#v-'+h)?h:'home';$$('.view').forEach(v=>v.classList.toggle('on',v.id==='v-'+id));scrollTo(0,0);(INIT[id]||(()=>{}))()}
+function route(){const h=location.hash.slice(1);if(h==='rep'||h==='hr'){location.replace(h==='rep'?'firmalar.html':'hr.html');return}const id=$('#v-'+h)?h:'home';$$('.view').forEach(v=>v.classList.toggle('on',v.id==='v-'+id));scrollTo(0,0);(INIT[id]||(()=>{}))()}
 addEventListener('hashchange',route);
   
 /* Kalkulyatorlar */
